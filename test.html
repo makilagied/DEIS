@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard with Custom Colors</title>
+  <!-- Include Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom styles */
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .dashboard-header {
+      background-color: #0864AF;
+      color: #fff;
+      padding: 15px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .menu-item {
+      margin: 10px 0;
+    }
+    .menu-link {
+      color: #0864AF;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .menu-icon {
+      margin-right: 10px;
+      color: #0864AF;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <button id="navbar-toggler-icon" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">☰</span>
+    </button>
+    <h1 class="mb-0">Welcome to DEIS</h1>
+    <div class="user-info">
+      <div class="profile-icon">JD</div>
+    </div>
+  </div>
+
+  <div class="collapse" id="menuCollapse">
+    <ul class="menu-list">
+      <!-- Menu items here -->
+    </ul>
+  </div>
+
+  <!-- Contestant Manifesto Cards -->
+  <div class="row mt-4">
+    <div class="col-md-12 dashboard-content">
+      <div class="row">
+        <!-- Contestant 1 -->
+        <div class="col-md-4">
+          <div class="profile-card">
+            <div class="profile-icon">JD</div>
+            <h2 class="profile-name">John Doe</h2>
+            <p class="profile-position">Candidate for President</p>
+            <div class="manifesto-card">
+              <h3 class="manifesto-title">Manifesto</h3>
+              <p class="manifesto-content">
+                Committed to improving education and healthcare for all. I believe in creating a brighter future for our community.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Contestant 2 -->
+        <div class="col-md-4">
+          <div class="profile-card">
+            <div class="profile-icon">AB</div>
+            <h2 class="profile-name">Alice Brown</h2>
+            <p class="profile-position">Candidate for Vice President</p>
+            <div class="manifesto-card">
+              <h3 class="manifesto-title">Manifesto</h3>
+              <p class="manifesto-content">
+                Advocating for sustainable environmental policies and community engagement. Let's work together for a greener tomorrow.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Contestant 3 -->
+        <div class="col-md-4">
+          <div class="profile-card">
+            <div class="profile-icon">EF</div>
+            <h2 class="profile-name">Eric Foster</h2>
+            <p class="profile-position">Candidate for Treasurer</p>
+            <div class="manifesto-card">
+              <h3 class="manifesto-title">Manifesto</h3>
+              <p class="manifesto-content">
+                Dedicated to responsible financial management and transparency. Together, we can ensure a strong financial foundation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Include Bootstrap JS and any additional scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Include Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</body>
+</html>
