@@ -239,6 +239,59 @@ button:hover {
   }
 }
 
+.announcement-card {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .announcement-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .announcement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .announcement-title {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .announcement-date {
+    color: #777;
+  }
+  
+  .announcement-content {
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .announcement-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .announcement-link {
+    color: #fff;
+    background-color: #0864AF;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .announcement-link:hover {
+    background-color: #065694;
+  }
+
   </style>
 </head>
 <body>
@@ -262,6 +315,13 @@ button:hover {
           Profile
         </a>
       </li>
+      <li class="menu-item">
+        <a href="#" class="menu-link" onclick="toggleContent('announcements')">
+          <i class="fas fa-bullhorn menu-icon"></i>
+          Announcements
+        </a>
+      </li>
+      
       <li class="menu-item">
         <a href="#" class="menu-link" onclick="toggleContent('settings')">
           <i class="fas fa-cog menu-icon"></i>
@@ -317,6 +377,44 @@ button:hover {
         width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
+ 
+<div class="content-section" id="announcementsContent">
+  <h2>Announcements</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="announcement-card mb-4">
+        <div class="announcement-header">
+          <h3 class="announcement-title">Announcement 1</h3>
+          <span class="announcement-date">Posted on August 25, 2023</span>
+        </div>
+        <div class="announcement-content">
+          This is an important announcement that you can download as a PDF.
+        </div>
+        <div class="announcement-footer">
+          <a href="announcement1.pdf" class="announcement-link" download>Download PDF</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="announcement-card mb-4">
+        <div class="announcement-header">
+          <h3 class="announcement-title">Announcement 2</h3>
+          <span class="announcement-date">Posted on August 24, 2023</span>
+        </div>
+        <div class="announcement-content">
+          This is another important announcement that you can download as a Word document.
+        </div>
+        <div class="announcement-footer">
+          <a href="announcement2.docx" class="announcement-link" download>Download Word</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="announcement-card">
+    <h3 class="announcement-title">Read-Only Announcement</h3>
+    <p class="announcement-content">This announcement is for information purposes only.</p>
+  </div>
+</div>
   
   
   <!-- Content sections -->
