@@ -14,6 +14,8 @@ if (!isset($_SESSION['user_id'])) {
 <html>
 <head>
   <title>Dashboard with Custom Colors</title>
+  <!-- Include Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- Include Chart.js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Include Bootstrap CSS -->
