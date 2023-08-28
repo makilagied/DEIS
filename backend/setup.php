@@ -66,6 +66,21 @@ if ($conn->query($sqlCreateTable) === TRUE) {
 
 // ...
 
+// Create the otp_requests table if it doesn't exist
+$sqlCreateOTPTable = "CREATE TABLE IF NOT EXISTS otp_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    request_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+if ($conn->query($sqlCreateOTPTable) === TRUE) {
+    echo "OTP requests table created successfully<br>";
+} else {
+    echo "Error creating OTP requests table: " . $conn->error;
+}
+
+// ...
+
+
 // Populate the table with random data and default role "student"
 $numberOfEntries = 100;
 $randomSurnames = ["Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor"];

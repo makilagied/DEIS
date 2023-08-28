@@ -190,7 +190,7 @@ if (!isset($_SESSION['user_id'])) {
       <div class="search-box">
         <input type="text" id="surname" class="search-input" placeholder="Enter Surname">
         <input type="text" id="regName" class="search-input" placeholder="Enter Registration Number">
-        <input type="text" id="year" class="search-input" placeholder="Enter Year of Study">
+        <!-- <input type="text" id="year" class="search-input" placeholder="Enter Year of Study"> -->
         <button class="search-button" onclick="performSearch()">Search</button>
         <div class="message-box" id="messageBox"></div>
       </div>
@@ -294,29 +294,43 @@ if (!isset($_SESSION['user_id'])) {
     var selectedContent = document.getElementById(contentId + 'Content');
     selectedContent.style.display = 'block';
   }
-
-  function performSearch() {
-    var surname = document.getElementById("surname").value;
-    var regName = document.getElementById("regName").value;
-    var year = document.getElementById("year").value;
-
-    // Simulate a search result
-    var success = true; // Change this based on your logic
-
-    var messageBox = document.getElementById("messageBox");
-    messageBox.innerHTML = "";
-
-    if (success) {
-      // Display OTP code
-      var otpCode = "123456"; // Replace with your OTP code
-      messageBox.innerHTML = "<p>Your OTP Code: " + otpCode + "</p>";
-    } else {
-      // Display error message
-      messageBox.innerHTML = "<p>Error: No matching records found.</p>";
-    }
-  }
 </script>
 
+<script>
+function performSearch() {
+  var surname = document.getElementById("surname").value;
+  var regName = document.getElementById("regName").value;
+
+  // Send the data to the server for user existence check and OTP generation
+  fetch("backend/check_user.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ surname: surname, regName: regName }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      var messageBox = document.getElementById("messageBox");
+      messageBox.innerHTML = "";
+
+      if (data.exists) {
+        if (data.message === "") {
+          messageBox.innerHTML = "<p>Your OTP Code: " + data.otp + "</p>";
+        } else {
+          messageBox.innerHTML = "<p>" + data.message + "</p>";
+        }
+      } else {
+        messageBox.innerHTML = "<p>Error: Student not found.</p>";
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+}
+
+
+</script>
 
 <script>
     // Function to generate random data
