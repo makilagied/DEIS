@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page or show a message
+    header("Location: login.php");
+    exit();
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,26 +24,17 @@
       background-color: #f8f9fa;
       font-family: Arial, sans-serif;
     }
-    html {
-    scroll-behavior: smooth;
-  }
-
-/* Style buttons */
-button {
-  background-color: #0864AF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-button:hover {
-  background-color: #F6B418;
-}
-
-    .profile-card {
-  /* max-width: 30% */
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+   /* Profile card */
+.profile-card {
+  /* max-width: 30%; */
   margin: 0 auto;
   padding: 20px;
   background-color: #ffffff;
@@ -105,193 +108,33 @@ button:hover {
       padding: 6px 10px;
       border-radius: 4px;
     }
-
-.map-container {
-  width: 100%;
-  height: 450px;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-    .dashboard-container {
-      max-width: 1200px;
+    .search-box {
+      max-width: 30%;
       margin: 0 auto;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-    .profile-card {
-      width: 100%; /* Adjust width to fit contents */
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-    .profile-icon {
-      font-size: 24px;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #F6B418;
-      color: #fff;
-      border-radius: 50%;
-      margin: 0 auto;
+    .search-input {
+      width: 100%;
+      padding: 10px;
       margin-bottom: 10px;
+      border: 1px solid #0864AF;
+      border-radius: 4px;
     }
-    .profile-name {
-      font-size: 1.5rem;
-      margin-bottom: 5px;
+    .search-button {
+      background-color: #0864AF;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
     }
-    .profile-position {
-      color: #777;
-      margin-bottom: 15px;
-    }
-    .manifesto-card {
-      text-align: left;
-      width: fit-content;
-    }
-    .manifesto-title {
-      font-size: 1.25rem;
-      margin-bottom: 5px;
-    }
-    .manifesto-content {
-      font-size: 0.875rem;
+    .message-box {
+      text-align: center;
+      margin-top: 20px;
     }
     .content-section {
       display: none; /* Hide content sections by default */
     }
-    /* Adjust layout for smaller screens */
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 10px;
-  }
-  .profile-card {
-    padding: 10px;
-  }
-  .profile-card,
-  .profile-name,
-  .profile-position,
-  .manifesto-card {
-    text-align: center;
-  }
-  .dashboard-header {
-    padding: 10px;
-    font-size: 1.5rem;
-  }
-  .menu-link {
-    font-size: 1rem;
-  }
-  .profile-icon {
-    font-size: 18px;
-    width: 30px;
-    height: 30px;
-    margin-bottom: 5px;
-  }
-  .chart-section {
-    margin: 10px 0;
-  }
-}
-
-/* Further adjustments for even smaller screens */
-@media (max-width: 576px) {
-  .dashboard-header {
-    font-size: 1.2rem;
-  }
-  .menu-link {
-    font-size: 0.9rem;
-  }
-  .profile-icon {
-    font-size: 16px;
-    width: 28px;
-    height: 28px;
-    margin-bottom: 5px;
-  }
-  .profile-card,
-  .manifesto-card {
-    padding: 10px;
-  }
-  .manifesto-title {
-    font-size: 1rem;
-    margin-bottom: 5px;
-  }
-  .manifesto-content {
-    font-size: 0.8rem;
-  }
-}
-
-/* Adjust width of contestant cards for small screens */
-@media (max-width: 576px) {
-  .profile-card {
-    width: 80%;
-  }
-}
-
-/* Adjust chart dimensions for small screens */
-@media (max-width: 576px) {
-  .chart-section canvas {
-    max-height: 200px;
-  }
-}
-
-.announcement-card {
-    background-color: #f8f9fa;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .announcement-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .announcement-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .announcement-title {
-    margin: 0;
-    font-size: 1.25rem;
-  }
-  
-  .announcement-date {
-    color: #777;
-  }
-  
-  .announcement-content {
-    color: #555;
-    margin-bottom: 15px;
-  }
-  
-  .announcement-footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .announcement-link {
-    color: #fff;
-    background-color: #0864AF;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  .announcement-link:hover {
-    background-color: #065694;
-  }
-
   </style>
 </head>
 <body>
@@ -316,13 +159,6 @@ button:hover {
         </a>
       </li>
       <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('announcements')">
-          <i class="fas fa-bullhorn menu-icon"></i>
-          Announcements
-        </a>
-      </li>
-      
-      <li class="menu-item">
         <a href="#" class="menu-link" onclick="toggleContent('settings')">
           <i class="fas fa-cog menu-icon"></i>
           Settings
@@ -335,30 +171,32 @@ button:hover {
         </a>
       </li>
       <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('polling')">
-          <i class="fas fa-map-marker-alt menu-icon"></i>
-          Polling Stations
-        </a>
-      </li>
-      
-      <li class="menu-item">
         <a href="#" class="menu-link" onclick="toggleContent('statistics')">
           <i class="fas fa-chart-bar menu-icon"></i>
           Statistics
         </a>
       </li>
       <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('logout')">
-          <i class="fas fa-sign-out-alt menu-icon"></i>
-          Logout
-        </a>
-      </li>
+    <a href="backend/logout.php" class="menu-link">
+        <i class="fas fa-sign-out-alt menu-icon"></i>
+        Logout
+    </a>
+</li>
     </ul>
   </div>
 
-<!-- Replace the search box with contestant manifesto cards -->
-
-
+  <div class="row mt-4">
+    <div class="col-md-12 dashboard-content">
+      <div class="search-box">
+        <input type="text" id="surname" class="search-input" placeholder="Enter Surname">
+        <input type="text" id="regName" class="search-input" placeholder="Enter Registration Number">
+        <input type="text" id="year" class="search-input" placeholder="Enter Year of Study">
+        <button class="search-button" onclick="performSearch()">Search</button>
+        <div class="message-box" id="messageBox"></div>
+      </div>
+    </div>
+  </div>
+  
   <!-- Content sections -->
 
   <!-- Profile content goes here -->
@@ -370,52 +208,6 @@ button:hover {
       <p class="profile-description">Passionate about coding and creating innovative solutions.</p>
     </div>
   </div>
-
-  <div class="content-section" id="pollingContent">
-    <div class="map-container">
-      <iframe src="/webmap/index.html" 
-        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-  </div>
- 
-<div class="content-section" id="announcementsContent">
-  <h2>Announcements</h2>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="announcement-card mb-4">
-        <div class="announcement-header">
-          <h3 class="announcement-title">Announcement 1</h3>
-          <span class="announcement-date">Posted on August 25, 2023</span>
-        </div>
-        <div class="announcement-content">
-          This is an important announcement that you can download as a PDF.
-        </div>
-        <div class="announcement-footer">
-          <a href="announcement1.pdf" class="announcement-link" download>Download PDF</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="announcement-card mb-4">
-        <div class="announcement-header">
-          <h3 class="announcement-title">Announcement 2</h3>
-          <span class="announcement-date">Posted on August 24, 2023</span>
-        </div>
-        <div class="announcement-content">
-          This is another important announcement that you can download as a Word document.
-        </div>
-        <div class="announcement-footer">
-          <a href="announcement2.docx" class="announcement-link" download>Download Word</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="announcement-card">
-    <h3 class="announcement-title">Read-Only Announcement</h3>
-    <p class="announcement-content">This announcement is for information purposes only.</p>
-  </div>
-</div>
-  
   
   <!-- Content sections -->
 <div class="content-section" id="settingsContent">
@@ -478,65 +270,11 @@ button:hover {
     </div>
   </div>
   
-  <div class="row mt-4">
-    <div class="col-md-12 dashboard-content">
-      <div class="row">
-        <!-- Contestant 1 -->
-        <div class="col-md-4">
-          <div class="profile-card">
-            <div class="profile-icon">JD</div>
-            <h2 class="profile-name">John Doe</h2>
-            <p class="profile-position">Candidate for President</p>
-            <div class="manifesto-card">
-              <h3 class="manifesto-title">Manifesto</h3>
-              <p class="manifesto-content">
-                Committed to improving education and healthcare for all. I believe in creating a brighter future for our community.
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- ... (Contestant 2 and 3) ... -->
-         <!-- Contestant 2 -->
-         <div class="col-md-4">
-            <div class="profile-card">
-              <div class="profile-icon">AB</div>
-              <h2 class="profile-name">Alice Brown</h2>
-              <p class="profile-position">Candidate for Vice President</p>
-              <div class="manifesto-card">
-                <h3 class="manifesto-title">Manifesto</h3>
-                <p class="manifesto-content">
-                  Advocating for sustainable environmental policies and community engagement. Let's work together for a greener tomorrow.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- Contestant 3 -->
-          <div class="col-md-4">
-            <div class="profile-card">
-              <div class="profile-icon">EF</div>
-              <h2 class="profile-name">Eric Foster</h2>
-              <p class="profile-position">Candidate for Treasurer</p>
-              <div class="manifesto-card">
-                <h3 class="manifesto-title">Manifesto</h3>
-                <p class="manifesto-content">
-                  Dedicated to responsible financial management and transparency. Together, we can ensure a strong financial foundation.
-                </p>
-              </div>
-            </div>
-          </div>
-      </div>
-    </div>
+  
+</div>
+</div>
   </div>
 </div>
-</div>
-
-
-  </div>
-</div>
-
-
-
-
 
 <!-- Include Font Awesome for icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -557,7 +295,26 @@ button:hover {
     selectedContent.style.display = 'block';
   }
 
+  function performSearch() {
+    var surname = document.getElementById("surname").value;
+    var regName = document.getElementById("regName").value;
+    var year = document.getElementById("year").value;
 
+    // Simulate a search result
+    var success = true; // Change this based on your logic
+
+    var messageBox = document.getElementById("messageBox");
+    messageBox.innerHTML = "";
+
+    if (success) {
+      // Display OTP code
+      var otpCode = "123456"; // Replace with your OTP code
+      messageBox.innerHTML = "<p>Your OTP Code: " + otpCode + "</p>";
+    } else {
+      // Display error message
+      messageBox.innerHTML = "<p>Error: No matching records found.</p>";
+    }
+  }
 </script>
 
 
@@ -671,3 +428,8 @@ button:hover {
   
 </body>
 </html>
+
+
+
+
+  
