@@ -211,6 +211,7 @@ body {
   </select>
   
   <button type="button" onclick="assignRole()">Assign Role</button>
+  <div id="responseContainer"></div>
 </form>
 
 </div>

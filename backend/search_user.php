@@ -11,25 +11,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get the search input
     $searchInput = $_POST["searchInput"];
     
-    // Perform search in the users table based on both name and regnumber
+    // Perform exact search in the users table
     $sqlSearch = "SELECT id, surname, regnumber FROM users WHERE surname = ? OR regnumber = ?";
     $stmt = $conn->prepare($sqlSearch);
     $stmt->bind_param("ss", $searchInput, $searchInput);
     $stmt->execute();
     $result = $stmt->get_result();
     
-    $userResults = array();
+    $users = array();
+
     while ($row = $result->fetch_assoc()) {
-        $userResults[] = $row;
+        $users[] = array(
+            'id' => $row["id"],
+            'surname' => $row["surname"],
+            'regnumber' => $row["regnumber"]
+        );
     }
     
-    if (!empty($userResults)) {
-        // Users found, return the list of users as JSON
-        echo json_encode($userResults);
-    } else {
-        // No users found
-        echo "No users found";
-    }
+    // Return user information as JSON
+    echo json_encode($users);
     
     $stmt->close();
 }
