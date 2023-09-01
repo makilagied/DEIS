@@ -6,7 +6,7 @@
     <!DOCTYPE html>
 <html>
 <head>
-  <title>Customized Bootstrap Login Form</title>
+  <title>DEIS | login</title>
   <!-- Include Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
@@ -45,12 +45,13 @@
     <img src="img/daruso logo.png" alt="Logo" class="login-logo">
 
     <form method="post" action="backend/auth.php">
+      <H6>LOGIN</H6>
       <div class="form-group">
-        <label for="username">User ID</label>
-        <input type="text" class="form-control" name="regnumber" placeholder="Enter Registration Number 2021-04-0321" required >
+        <!-- <label for="username">User ID</label> -->
+        <input type="text" class="form-control" name="regnumber" placeholder="Enter your Identification Number" required >
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
+        <!-- <label for="password">Password</label> -->
         <input type="password" class="form-control" name="password" placeholder="Enter password" required >
       </div>
       <button type="submit" class="btn btn-primary btn-block">Login</button>

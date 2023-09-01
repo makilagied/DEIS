@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard with Custom Colors</title>
+  <title>DEIS | Dashboard</title>
   <!-- Include Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- Include Chart.js library -->
@@ -94,6 +94,13 @@ if (!isset($_SESSION['user_id'])) {
     .menu-item {
       margin: 10px 0;
     }
+      /* Disable underlining on hover for all links */
+a:hover {
+    text-decoration: none;
+    /* background-color:#0864AF; */
+    color:black;
+}
+
     .menu-link {
       color: #0864AF;
       text-decoration: none;
@@ -111,7 +118,7 @@ if (!isset($_SESSION['user_id'])) {
       border-radius: 4px;
     }
     .search-box {
-      max-width: 30%;
+      max-width: 40%;
       margin: 0 auto;
       text-align: center;
     }
@@ -137,16 +144,69 @@ if (!isset($_SESSION['user_id'])) {
     .content-section {
       display: none; /* Hide content sections by default */
     }
+    .form-section {
+            display: none;
+  }
+  .form-heading {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+
+
+   /* Custom CSS styles */
+   .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        /* Additional CSS for form elements */
+        input[type="number"] {
+            width: 70px;
+        }
+
+        /* Responsive table */
+        @media (max-width: 576px) {
+            .table {
+                overflow-x: auto;
+            }
+        }
+
   </style>
 </head>
 <body>
 
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <button id="navbar-toggler-icon" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon">☰</span>
-    </button>
-    <h1 class="mb-0">Welcome to DEIS</h1>
+  <button id="navbar-toggler-icon" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon">☰</span>
+</button>
+    <h4 class="mb-0">TUME YA UCHAGUZI </h4>
     <div class="user-info">
       <div class="profile-icon">JD</div>
     </div>
@@ -179,24 +239,30 @@ if (!isset($_SESSION['user_id'])) {
         </a>
       </li>
       <li class="menu-item">
+          <a href="#" class="menu-link" onclick="toggleContent('assessment')">
+             <i class="fas fa-file-alt menu-icon"></i>
+             Assessment Forms
+           </a>
+       </li>
+      <li class="menu-item">
+         <a href="#" class="menu-link" onclick="toggleContent('nominations')">
+         <i class="fas fa-user-check menu-icon"></i>
+          Nominations
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="#" class="menu-link" onclick="toggleContent('voting')">
+          <i class="fas fa-vote-yea  menu-icon"></i>
+           Voting
+        </a>
+      </li>
+      <li class="menu-item">
     <a href="backend/logout.php" class="menu-link">
         <i class="fas fa-sign-out-alt menu-icon"></i>
         Logout
     </a>
 </li>
     </ul>
-  </div>
-
-  <div class="row mt-4">
-    <div class="col-md-12 dashboard-content">
-      <div class="search-box">
-        <input type="text" id="surname" class="search-input" placeholder="Enter Surname">
-        <input type="text" id="regName" class="search-input" placeholder="Enter Registration Number">
-        <!-- <input type="text" id="year" class="search-input" placeholder="Enter Year of Study"> -->
-        <button class="search-button" onclick="performSearch()">Search</button>
-        <div class="message-box" id="messageBox"></div>
-      </div>
-    </div>
   </div>
   
   <!-- Content sections -->
@@ -229,9 +295,6 @@ if (!isset($_SESSION['user_id'])) {
     </script>
   </div>
   
-  <div class="content-section" id="logoutContent">
-    <!-- Logout content goes here -->
-  </div>
 
   <!-- results -->
   <div class="content-section" id="resultsContent">
@@ -271,7 +334,195 @@ if (!isset($_SESSION['user_id'])) {
       </div>
     </div>
   </div>
-  
+
+
+<!-- Nominations content -->
+<div class="content-section" id="nominationsContent">
+    <h2>Nominations</h2>
+    <form id="nominationsForm" class='paper-form'>
+        <!-- Form fields for candidate information -->
+        <div class="form-group">
+            <label for="candidateName">Candidate Name:</label>
+            <input type="text" class="form-control" id="candidateName" name="candidateName" required>
+        </div>
+        <div class="form-group">
+            <label for="candidateReg">Registration Number</label>
+            <input type="text" class="form-control" id="candidateName" name="candidateName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="position">Position:</label>
+            <input type="text" class="form-control" id="position" name="position" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bio">Bio:</label>
+            <textarea class="form-control" id="bio" name="bio" rows="4" required></textarea>
+        </div>
+
+        <!-- Add more form fields as needed -->
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="button" class="btn btn-primary" onclick="submitNomination()">Submit Nomination</button>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- Assessment Forms content -->
+<div class="content-section" id="assessmentContent">
+<div class="container mt-5">
+        <h1>DARUSO Assessment Form</h1>
+        <form id="assessmentForm">
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="aspirantName">Name of Aspirant</label>
+                <input type="text" class="form-control" id="aspirantName" name="aspirantName" required>
+            </div>
+            <div class="form-group">
+                <label for="registrationNumber">Registration Number</label>
+                <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="yearOfStudy">Year of Study</label>
+                <input type="text" class="form-control" id="yearOfStudy" name="yearOfStudy" required>
+            </div>
+            <div class="form-group">
+                <label for="programme">Programme</label>
+                <input type="text" class="form-control" id="programme" name="programme" required>
+            </div>
+            <div class="form-group">
+                <label for="postContested">Post Contested</label>
+                <input type="text" class="form-control" id="postContested" name="postContested" required>
+            </div>
+            <div class="form-group">
+                <label for="hallsBlocks">Halls/Blocks</label>
+                <input type="text" class="form-control" id="hallsBlocks" name="hallsBlocks" required>
+            </div>
+
+            <!-- Criteria for Assessment -->
+            <h2>Criteria for Assessment</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Criteria for Assessment</th>
+                        <th>G/Marks</th>
+                        <th>Marks Scored</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- You can add more rows for other criteria -->
+                    <tr>
+                        <td>1</td>
+                        <td>Physical Appearance and Personality</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score1" required></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Confidence of the Aspirant</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score2" required></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Knowledge about the Existing Students’ Problems</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score3" required></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Knowledge about DARUSO</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score4" required></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Response to the Questions</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score5" required></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Fluency in Both English and Swahili Languages</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score6" required></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Articulation</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score7" required></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Leadership Experience</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score8" required></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Uniqueness and Neatness</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score9" required></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>International and Cross Cutting Issues</td>
+                        <td>10</td>
+                        <td><input type="number" class="form-control" name="score10" required></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Member of General Electoral Committee -->
+            <h2>Member of General Electoral Committee</h2>
+            <div class="form-group">
+                <label for="committeeMemberName">Name</label>
+                <input type="text" class="form-control" id="committeeMemberName" name="committeeMemberName" required>
+            </div>
+            <div class="form-group">
+                <label for="committeeMemberSignature">Signature</label>
+                <input type="text" class="form-control" id="committeeMemberSignature" name="committeeMemberSignature" required>
+            </div>
+
+            <!-- Chairperson General Electoral Committee -->
+            <h2>Chairperson General Electoral Committee</h2>
+            <div class="form-group">
+                <label for="chairpersonName">Name</label>
+                <input type="text" class="form-control" id="chairpersonName" name="chairpersonName" required>
+            </div>
+            <div class="form-group">
+                <label for="chairpersonSignature">Signature</label>
+                <input type="text" class="form-control" id="chairpersonSignature" name="chairpersonSignature" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit Assessment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <!-- Voter Verification content -->
+<div class="content-section" id="votingContent">
+  <h2>Voter Verification</h2>
+  <div class="row mt-4">
+    <div class="col-md-12 dashboard-content">
+      <div class="search-box">
+        <input type="text" id="surname" class="search-input" placeholder="Enter Surname">
+        <input type="text" id="regName" class="search-input" placeholder="Enter Registration Number">
+        <button class="search-button" onclick="performSearch()">Verify Voter</button>
+        <div class="message-box" id="messageBox"></div>
+      </div>
+    </div>
+  </div>
+</div>
   
 </div>
 </div>
@@ -296,6 +547,36 @@ if (!isset($_SESSION['user_id'])) {
     var selectedContent = document.getElementById(contentId + 'Content');
     selectedContent.style.display = 'block';
   }
+
+
+  
+
+function submitAssessment() {
+        // Retrieve questionnaire data and send it to the server for processing
+        var satisfaction = document.querySelector('input[name="satisfaction"]:checked').value;
+        var usability = document.getElementById("usability").value;
+
+        // Send the data to the server for processing
+        // You can use JavaScript fetch or AJAX for this purpose
+
+        // Display a success message or handle errors as needed
+        // For example:
+        alert("Assessment submitted successfully!");
+    }
+
+    function submitNomination() {
+        // Retrieve form data and send it to the server for database upload
+        var candidateName = document.getElementById("candidateName").value;
+        var position = document.getElementById("position").value;
+        var bio = document.getElementById("bio").value;
+
+        // Send the data to the server for database upload
+        // You can use JavaScript fetch or AJAX for this purpose
+
+        // Display a success message or handle errors as needed
+        // For example:
+        alert("Nomination submitted successfully!");
+    }
 </script>
 
 <script>
