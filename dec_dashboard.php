@@ -26,6 +26,15 @@ if (!isset($_SESSION['user_id'])) {
       background-color: #f8f9fa;
       font-family: Arial, sans-serif;
     }
+
+    @media (max-width: 768px) {
+      .menu-list {
+        display: block; /* Change to block display for mobile */
+      }
+      .menu-item {
+        margin: 10px 0;
+      }
+    }
     .dashboard-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -110,13 +119,13 @@ a:hover {
       margin-right: 10px;
       color: #0864AF;
     }
-    #navbar-toggler-icon {
+    /* #navbar-toggler-icon {
       color: #F6B418;
       background-color: #0864AF;
       border: none;
       padding: 6px 10px;
       border-radius: 4px;
-    }
+    } */
     .search-box {
       max-width: 40%;
       margin: 0 auto;
@@ -168,6 +177,7 @@ a:hover {
         }
 
         h2 {
+          text-align: center;
             font-size: 18px;
             margin-top: 30px;
             margin-bottom: 10px;
@@ -203,67 +213,89 @@ a:hover {
 
 <div class="dashboard-container">
   <div class="dashboard-header">
-  <button id="navbar-toggler-icon" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon">☰</span>
-</button>
-    <h4 class="mb-0">TUME YA UCHAGUZI </h4>
+    <h1 class="mb-0">TUME YA UCHAGUZI </h1>
     <div class="user-info">
       <div class="profile-icon">JD</div>
     </div>
   </div>
 
-  <div class="collapse" id="menuCollapse">
-    <ul class="menu-list">
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('profile')">
+
+    <!-- Modify your navigation menu with Bootstrap classes -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button id="navbar-toggler-icon" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="menuCollapse">
+    <ul class="navbar-nav ml-auto">
+      <!-- Profile -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('profile')">
           <i class="fas fa-user menu-icon"></i>
           Profile
         </a>
       </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('settings')">
+
+      <!-- Settings -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('settings')">
           <i class="fas fa-cog menu-icon"></i>
           Settings
         </a>
       </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('results')">
+
+      <!-- Results -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('results')">
           <i class="fas fa-file menu-icon"></i>
           Results
         </a>
       </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('statistics')">
+
+      <!-- Statistics -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('statistics')">
           <i class="fas fa-chart-bar menu-icon"></i>
           Statistics
         </a>
       </li>
-      <li class="menu-item">
-          <a href="#" class="menu-link" onclick="toggleContent('assessment')">
-             <i class="fas fa-file-alt menu-icon"></i>
-             Assessment Forms
-           </a>
-       </li>
-      <li class="menu-item">
-         <a href="#" class="menu-link" onclick="toggleContent('nominations')">
-         <i class="fas fa-user-check menu-icon"></i>
+
+      <!-- Assessment Forms -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('assessment')">
+          <i class="fas fa-file-alt menu-icon"></i>
+          Assessment Forms
+        </a>
+      </li>
+
+      <!-- Nominations -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('nominations')">
+          <i class="fas fa-user-check menu-icon"></i>
           Nominations
         </a>
       </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('voting')">
-          <i class="fas fa-vote-yea  menu-icon"></i>
-           Voting
+
+      <!-- Voting -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('voting')">
+          <i class="fas fa-vote-yea menu-icon"></i>
+          Voting
         </a>
       </li>
-      <li class="menu-item">
-    <a href="backend/logout.php" class="menu-link">
-        <i class="fas fa-sign-out-alt menu-icon"></i>
-        Logout
-    </a>
-</li>
+
+      <!-- Logout -->
+      <li class="nav-item">
+        <a href="backend/logout.php" class="nav-link">
+          <i class="fas fa-sign-out-alt menu-icon"></i>
+          Logout
+        </a>
+      </li>
     </ul>
   </div>
+</nav>
+
+
   
   <!-- Content sections -->
 
@@ -373,39 +405,45 @@ a:hover {
 
 <!-- Assessment Forms content -->
 <div class="content-section" id="assessmentContent">
-<div class="container mt-5">
-        <h1>DARUSO Assessment Form</h1>
-        <form id="assessmentForm">
-            <!-- Personal Information -->
-            <div class="form-group">
-                <label for="aspirantName">Name of Aspirant</label>
-                <input type="text" class="form-control" id="aspirantName" name="aspirantName" required>
-            </div>
-            <div class="form-group">
-                <label for="registrationNumber">Registration Number</label>
-                <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" required>
-            </div>
-            <div class="form-group">
-                <label for="yearOfStudy">Year of Study</label>
-                <input type="text" class="form-control" id="yearOfStudy" name="yearOfStudy" required>
-            </div>
-            <div class="form-group">
-                <label for="programme">Programme</label>
-                <input type="text" class="form-control" id="programme" name="programme" required>
-            </div>
-            <div class="form-group">
-                <label for="postContested">Post Contested</label>
-                <input type="text" class="form-control" id="postContested" name="postContested" required>
-            </div>
-            <div class="form-group">
-                <label for="hallsBlocks">Halls/Blocks</label>
-                <input type="text" class="form-control" id="hallsBlocks" name="hallsBlocks" required>
-            </div>
+  <div class="container mt-5">
+    <h1>DARUSO Assessment Form</h1>
+    <form id="assessmentForm">
+      <!-- Personal Information -->
+      <div class="form-group">
+        <label for="aspirantName">Name of Aspirant</label>
+        <input type="text" class="form-control" id="aspirantName" name="aspirantName" required>
+      </div>
+      <div class="form-group">
+        <label for="registrationNumber">Registration Number</label>
+        <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="yearOfStudy">Year of Study</label>
+         <input type="text" class="form-control" id="yearOfStudy" name="yearOfStudy" required>
+      </div>
+      <div class="form-group">
+        <label for="programme">Programme</label>
+        <input type="text" class="form-control" id="programme" name="programme" required>
+      </div>
+      <div class="form-group">
+        <label for="postContested">Post Contested</label>
+        <input type="text" class="form-control" id="postContested" name="postContested" required>
+      </div>
+      <div class="form-group">
+        <label for="hallsBlocks">Halls/Blocks</label>
+        <input type="text" class="form-control" id="hallsBlocks" name="hallsBlocks" required>
+       </div>
 
-            <!-- Criteria for Assessment -->
-            <h2>Criteria for Assessment</h2>
-            <table class="table table-bordered">
-                <thead>
+      <!-- Button to reveal criteria section -->
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" onclick="showCriteriaSection()">Next: Criteria for Assessment</button>
+      </div>
+
+      <!-- Criteria for Assessment Section (Initially hidden) -->
+      <div id="criteriaSection" style="display: none;">
+        <h2>Criteria for Assessment</h2>
+        <table class="table table-bordered">
+        <thead>
                     <tr>
                         <th>S/N</th>
                         <th>Criteria for Assessment</th>
@@ -476,37 +514,31 @@ a:hover {
                         <td><input type="number" class="form-control" name="score10" required></td>
                     </tr>
                 </tbody>
-            </table>
+        </table>
 
-            <!-- Member of General Electoral Committee -->
-            <h2>Member of General Electoral Committee</h2>
-            <div class="form-group">
-                <label for="committeeMemberName">Name</label>
-                <input type="text" class="form-control" id="committeeMemberName" name="committeeMemberName" required>
-            </div>
-            <div class="form-group">
-                <label for="committeeMemberSignature">Signature</label>
-                <input type="text" class="form-control" id="committeeMemberSignature" name="committeeMemberSignature" required>
-            </div>
+        <!-- Member of General Electoral Committee -->
+        <h2>Electoral Committee</h2>
+        <div class="form-group">
+          <label for="committeeMemberName">Name</label>
+          <input type="text" class="form-control" id="committeeMemberName" name="committeeMemberName" required>
+        </div>
+        <div class="form-group">
+          <label for="committeeMemberSignature">Signature</label>
+          <input type="text" class="form-control" id="committeeMemberSignature" name="committeeMemberSignature" required>
+        </div>
+         <!-- Submit Button -->
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" onclick="submitAssessment()">Submit Assessment</button>
+      </div>
+      </div>
 
-            <!-- Chairperson General Electoral Committee -->
-            <h2>Chairperson General Electoral Committee</h2>
-            <div class="form-group">
-                <label for="chairpersonName">Name</label>
-                <input type="text" class="form-control" id="chairpersonName" name="chairpersonName" required>
-            </div>
-            <div class="form-group">
-                <label for="chairpersonSignature">Signature</label>
-                <input type="text" class="form-control" id="chairpersonSignature" name="chairpersonSignature" required>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Submit Assessment</button>
-            </div>
-        </form>
-    </div>
+     
+    </form>
+  </div>
 </div>
+
+
+
 
 
     <!-- Voter Verification content -->
@@ -722,6 +754,14 @@ function performSearch() {
       createStatisticsCharts();
     };
   </script>
+
+  <!-- JavaScript to toggle the visibility of the criteria section -->
+<script>
+  function showCriteriaSection() {
+    var criteriaSection = document.getElementById("criteriaSection");
+    criteriaSection.style.display = "block";
+  }
+</script>
   
 </body>
 </html>
