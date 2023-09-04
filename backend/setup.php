@@ -50,7 +50,7 @@ $defaultRoleName = "student";
 $defaultRoleID = getRoleIDByName($defaultRoleName);
 
 // Create the users table if it doesn't exist
-$sqlCreateTable = "CREATE TABLE IF NOT EXISTS users (
+$sqlCreateUsersTable = "CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     regnumber VARCHAR(13) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -58,10 +58,39 @@ $sqlCreateTable = "CREATE TABLE IF NOT EXISTS users (
     role_id INT NOT NULL,
     FOREIGN KEY (role_id) REFERENCES roles(id)
 )";
-if ($conn->query($sqlCreateTable) === TRUE) {
-    echo "Table created successfully<br>";
+if ($conn->query($sqlCreateUsersTable) === TRUE) {
+    echo "Users table created successfully<br>";
 } else {
-    echo "Error creating table: " . $conn->error;
+    echo "Error creating users table: " . $conn->error;
+}
+
+// Create the nominations table if it doesn't exist
+$sqlCreateNominationsTable = "CREATE TABLE IF NOT EXISTS nominations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidate_name VARCHAR(255) NOT NULL,
+    position VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)";
+if ($conn->query($sqlCreateNominationsTable) === TRUE) {
+    echo "Nominations table created successfully<br>";
+} else {
+    echo "Error creating nominations table: " . $conn->error;
+}
+
+// Create the assessments table if it doesn't exist
+$sqlCreateAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    candidate_name VARCHAR(255) NOT NULL,
+    position VARCHAR(255) NOT NULL,
+    score INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)";
+if ($conn->query($sqlCreateAssessmentsTable) === TRUE) {
+    echo "Assessments table created successfully<br>";
+} else {
+    echo "Error creating assessments table: " . $conn->error;
 }
 
 // ...
@@ -70,7 +99,8 @@ if ($conn->query($sqlCreateTable) === TRUE) {
 $sqlCreateOTPTable = "CREATE TABLE IF NOT EXISTS otp_requests (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    request_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    request_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 )";
 if ($conn->query($sqlCreateOTPTable) === TRUE) {
     echo "OTP requests table created successfully<br>";
@@ -79,7 +109,6 @@ if ($conn->query($sqlCreateOTPTable) === TRUE) {
 }
 
 // ...
-
 
 // Populate the table with random data and default role "student"
 $numberOfEntries = 100;
