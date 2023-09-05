@@ -111,7 +111,7 @@ body {
     }
     #navbar-toggler-icon {
       color: #F6B418;
-      background-color: #0864AF;
+      /* background-color: #0864AF; */
       border: none;
       padding: 6px 10px;
       border-radius: 4px;
@@ -149,215 +149,342 @@ body {
 
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <button id="navbar-toggler-icon" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon">☰</span>
-    </button>
-    <h1 class="mb-0">Welcome to Admin Panel</h1>
+    <h4 class="mb-0 text-center">TUME YA RUFAA </h4>
     <div class="user-info">
       <div class="profile-icon">JD</div>
     </div>
   </div>
+<!-- Modify your navigation menu with Bootstrap classes -->
+<!-- Modify your navigation menu with custom icons for the "Appeals" dropdown -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button id="navbar-toggler-icon" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <div class="collapse" id="menuCollapse">
-    <ul class="menu-list">
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('assignRole')">
-          <i class="fas fa-user-shield menu-icon"></i>
-          Assign Role
+  <div class="collapse navbar-collapse" id="menuCollapse">
+    <ul class="navbar-nav ml-auto">
+      <!-- Profile -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('profile')">
+          <i class="fas fa-user menu-icon"></i>
+          Profile
         </a>
       </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('editUser')">
-          <i class="fas fa-user-edit menu-icon"></i>
-          Edit User
+
+      <!-- Results -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('results')">
+          <i class="fas fa-file menu-icon"></i>
+          Results
         </a>
       </li>
-      <li class="menu-item">
-        <a href="backend/logout.php" class="menu-link">
+
+      <!-- Statistics -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('statistics')">
+          <i class="fas fa-chart-bar menu-icon"></i>
+          Statistics
+        </a>
+      </li>
+
+      <!-- Appeals Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="appealsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-gavel menu-icon"></i>
+          Appeals
+        </a>
+        <div class="dropdown-menu" aria-labelledby="appealsDropdown">
+          <a class="dropdown-item" href="#" onclick="toggleContent('appealsReceived')">
+            <i class="fas fa-inbox menu-icon"></i>
+            Appeals Received
+          </a>
+          <a class="dropdown-item" href="#" onclick="toggleContent('appealsOnProcess')">
+            <i class="fas fa-cogs menu-icon"></i>
+            Appeals on Process
+          </a>
+          <a class="dropdown-item" href="#" onclick="toggleContent('appealsCompleted')">
+            <i class="fas fa-check-circle menu-icon"></i>
+            Appeals Completed
+          </a>
+        </div>
+      </li>
+       <!-- Logout -->
+       <li class="nav-item">
+        <a href="backend/logout.php" class="nav-link">
           <i class="fas fa-sign-out-alt menu-icon"></i>
           Logout
         </a>
       </li>
     </ul>
   </div>
+</nav>
 
-  <!-- Content sections -->
-
-<!-- Assign Role content goes here -->
-<div class="content-section" id="assignRoleContent">
-  <h2>Assign Role</h2>
-  <!-- Search and role assignment form -->
-  <!-- Search and role assignment form -->
-<form id="assignRoleForm">
-  <label for="searchInput">Search by Username or Regnumber:</label>
-  <input type="text" id="searchInput" name="searchInput" required>
-  <button type="button" onclick="searchUser();">Search User</button>
-</form>
-
-<!-- Display search status -->
-<div id="searchResponse">
-  <p id="searchStatus"></p>
+<!-- Content sections -->
+<div id="profile" class="content-section">
+  <!-- Profile content here -->
+  <div class="profile-card">
+      <div class="profile-icon">JD</div>
+      <h2 class="profile-name">John Doe</h2>
+      <p class="profile-title">Software Engineer</p>
+      <p class="profile-description">Passionate about coding and creating innovative solutions.</p>
+    </div>
 </div>
 
+<div id="results" class="content-section">
+  <!-- Results content here -->
+   <!-- Results Bar Chart -->
+   <div class="chart-section">
+      <h2>Results Bar Chart</h2>
+      <div style="max-height: 5cm; overflow: hidden;">
+        <canvas id="resultsBarChart" style="max-height: 5cm;"></canvas>
+      </div>
+    </div>
+</div>
 
-<!-- Display user information and role assignment form -->
-<div id="searchResults"></div>
-
-<!-- Role assignment form (hidden by default) -->
-<form id="roleAssignmentForm" style="display: none;">
-  <label for="role_id">Select Role:</label>
-  <select id="new_role_id" name="new_role_id">
-    <option value="2">Daruso</option>
-  </select>
+<div id="statistics" class="content-section">
+  <!-- Statistics content here -->
+   <!-- Bar Chart -->
+   <div class="chart-section">
+      <h2>Bar Chart</h2>
+      <div style="max-height: 5cm; overflow: hidden;">
+        <canvas id="barChart" style="max-height: 5cm;"></canvas>
+      </div>
+    </div>
   
-  <button type="button" onclick="assignRole()">Assign Role</button>
-  <div id="responseContainer"></div>
-</form>
+    <!-- Pie Chart -->
+    <div class="chart-section">
+      <h2>Pie Chart</h2>
+      <div style="max-height: 5cm; overflow: hidden;">
+        <canvas id="pieChart" style="max-height: 5cm;"></canvas>
+      </div>
+    </div>
+  
+    <!-- Histogram -->
+    <div class="chart-section">
+      <h2>Histogram</h2>
+      <div style="max-height: 5cm; overflow: hidden;">
+        <canvas id="histogramChart" style="max-height: 5cm;"></canvas>
+      </div>
+    </div>
+</div>
 
+<div id="appealsReceived" class="content-section">
+  <h3>Appeals Received</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Registration Number</th>
+        <th>Name</th>
+        <th>Post Contesting</th>
+        <th>Reason for Appealing</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Populate this section with data for appeals received -->
+      <tr>
+        <td>2023-01-001</td>
+        <td>John Doe</td>
+        <td>President</td>
+        <td>Disputed vote count</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+</div>
+
+<div id="appealsOnProcess" class="content-section">
+  <h3>Appeals on Process</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Registration Number</th>
+        <th>Name</th>
+        <th>Post Contesting</th>
+        <th>Reason for Appealing</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Populate this section with data for appeals on process -->
+      <tr>
+        <td>2023-01-002</td>
+        <td>Jane Smith</td>
+        <td>Vice President</td>
+        <td>Alleged misconduct</td>
+        <td>In progress</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
 </div>
 
 
-  <!-- Edit User content goes here -->
-  <div class="content-section" id="editUserContent">
-    <h2>Edit User Information</h2>
-    <!-- Form to edit user information -->
-    <form id="editUserForm" action="backend/edit_user.php" method="post">
-      <label for="user_id">Select User:</label>
-      <select id="user_id" name="user_id">
-        <option value="1">User 1</option>
-        <option value="2">User 2</option>
-        <!-- Add more user options here -->
-      </select>
-      <label for="new_name">New Name:</label>
-      <input type="text" id="new_name" name="new_name">
-      <label for="new_email">New Email:</label>
-      <input type="email" id="new_email" name="new_email">
-      <button type="submit">Save Changes</button>
-    </form>
-  </div>
-
+<div id="appealsCompleted" class="content-section">
+  <h3>Appeals Completed</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Registration Number</th>
+        <th>Name</th>
+        <th>Post Contesting</th>
+        <th>Reason for Appealing</th>
+        <th>Judgment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Populate this section with data for appeals completed -->
+      <tr>
+        <td>2023-01-003</td>
+        <td>Emily Johnson</td>
+        <td>Treasurer</td>
+        <td>Irregularities in voting process</td>
+        <td>Appeal granted</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
 </div>
 
+
+
+
+<!-- Include Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <!-- Include Bootstrap JS and any additional scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
 
 <script>
+  // JavaScript functions for toggling content
   function toggleContent(contentId) {
     // Hide all content sections
-    var contentSections = document.querySelectorAll('.content-section');
-    contentSections.forEach(function(section) {
+    const contentSections = document.querySelectorAll('.content-section');
+    contentSections.forEach((section) => {
       section.style.display = 'none';
     });
 
     // Show the selected content section
-    var selectedContent = document.getElementById(contentId + 'Content');
-    selectedContent.style.display = 'block';
-
-    // Hide the role assignment form
-    document.getElementById("roleAssignmentForm").style.display = "none";
-  }
-
-// Function to handle role assignment
-function assignRole() {
-  // Gather selected user IDs and the new role ID
-  var selectedUsers = [];
-  $("input[name='selected_users[]']:checked").each(function() {
-    selectedUsers.push($(this).val());
-  });
-
-  var newRoleDropdown = document.getElementById("new_role_id");
-  var newRoleID = newRoleDropdown ? newRoleDropdown.value : null;
-
-  if (newRoleID !== null) {
-    // Perform AJAX request to assign new role
-    $.ajax({
-      type: "POST",
-      url: "backend/assign_role.php", // Modify this to your backend script
-      data: {
-        selected_users: selectedUsers,
-        new_role_id: newRoleID
-      },
-      success: function(response) {
-        // Display response on the dashboard
-        document.getElementById("responseContainer").innerHTML = response;
-      },
-      error: function(xhr, status, error) {
-        console.error(error);
-      }
-    });
-  } else {
-    console.error("New role dropdown not found");
-  }
-}
-
-
-
-
-
-
-function searchUser() {
-  var searchInput = document.getElementById("searchInput").value;
-  console.log("Search Input:", searchInput);
-
-  $.ajax({
-    type: "POST",
-    url: "backend/search_user.php",
-    data: {
-      searchInput: searchInput
-    },
-    success: function(response) {
-      console.log("Search response:", response);
-
-      var searchStatus = document.getElementById("searchStatus");
-      var searchResults = document.getElementById("searchResults");
-      var roleAssignmentForm = document.getElementById("roleAssignmentForm");
-
-      // Clear previous search results
-      searchResults.innerHTML = "";
-
-      // Parse the JSON response
-      var userResults = JSON.parse(response);
-
-      if (userResults.length > 0) {
-  console.log("Users found");
-
-  var userHtml = "";
-  userResults.forEach(function(user) {
-    userHtml += `
-      <div class="user-entry">
-        <p>User Information: ${user.surname} (${user.regnumber})</p>
-        <label for="user_${user.id}">
-          <input type="checkbox" id="user_${user.id}" name="selected_users[]" value="${user.id}">
-          Select this user
-        </label>
-      </div>
-    `;
-  });
-
-  searchResults.innerHTML = userHtml;
-
-  searchStatus.textContent = ""; // Clear the status message
-  roleAssignmentForm.style.display = "block";
-} else {
-  console.log("No users found");
-  searchStatus.textContent = "No users found";
-  roleAssignmentForm.style.display = "none";
-}
-
-    },
-    error: function(xhr, status, error) {
-      console.error("AJAX Error:", error);
+    const selectedContent = document.getElementById(contentId);
+    if (selectedContent) {
+      selectedContent.style.display = 'block';
     }
-  });
-}
-
-
-
-
-
+  }
 </script>
+
+<script>
+    // Function to generate random data
+    function generateRandomData(count) {
+      const data = [];
+      for (let i = 0; i < count; i++) {
+        data.push(Math.floor(Math.random() * 100));
+      }
+      return data;
+    }
+  
+    // Function to create charts
+
+    // Function to create the Results Bar Chart
+    function createResultsBarChart() {
+      var resultsBarChart = new Chart(document.getElementById("resultsBarChart"), {
+        type: 'bar',
+        data: {
+          labels: ['Subject 1', 'Subject 2', 'Subject 3', 'Subject 4'],
+          datasets: [{
+            label: 'Results',
+            data: [85, 70, 95, 60], // Sample data
+            backgroundColor: '#0864AF',
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    }
+  
+    // Function to create the Statistics Charts
+    function createStatisticsCharts() {
+      // Bar Chart
+      var barChart = new Chart(document.getElementById("barChart"), {
+        type: 'bar',
+        data: {
+          labels: ['Category 1', 'Category 2', 'Category 3'],
+          datasets: [{
+            label: 'Bar Chart Data',
+            data: generateRandomData(3),
+            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      });
+  
+      // Pie Chart
+      var pieChart = new Chart(document.getElementById("pieChart"), {
+        type: 'pie',
+        data: {
+          labels: ['Label 1', 'Label 2', 'Label 3'],
+          datasets: [{
+            label: 'Pie Chart Data',
+            data: generateRandomData(3),
+            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      });
+  
+      // Histogram
+      var histogramChart = new Chart(document.getElementById("histogramChart"), {
+        type: 'bar',
+        data: {
+          labels: ['Range 1', 'Range 2', 'Range 3'],
+          datasets: [{
+            label: 'Histogram Data',
+            data: generateRandomData(3),
+            backgroundColor: '#0864AF',
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    }
+  
+    // Call the functions to create charts when the page loads
+    window.onload = function () {
+      createResultsBarChart();
+      createStatisticsCharts();
+    };
+  </script>
 
 
 </body>

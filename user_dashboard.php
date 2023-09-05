@@ -311,64 +311,70 @@ button:hover {
 
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <button id="navbar-toggler-icon" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon">☰</span>
-    </button>
     <h1 class="mb-0">Welcome to DEIS</h1>
     <div class="user-info">
       <div class="profile-icon">JD</div>
     </div>
   </div>
 
-  <div class="collapse" id="menuCollapse">
-    <ul class="menu-list">
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('profile')">
+      <!-- Modify your navigation menu with Bootstrap classes -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button id="navbar-toggler-icon" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="menuCollapse">
+    <ul class="navbar-nav ml-auto">
+      <!-- Profile -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('profile')">
           <i class="fas fa-user menu-icon"></i>
           Profile
         </a>
       </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('announcements')">
+
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('announcements')">
           <i class="fas fa-bullhorn menu-icon"></i>
           Announcements
         </a>
       </li>
-      
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('settings')">
-          <i class="fas fa-cog menu-icon"></i>
-          Settings
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('results')">
+
+      <!-- Results -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('results')">
           <i class="fas fa-file menu-icon"></i>
           Results
         </a>
       </li>
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('polling')">
-          <i class="fas fa-map-marker-alt menu-icon"></i>
-          Polling Stations
-        </a>
-      </li>
-      
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('statistics')">
+
+      <!-- Statistics -->
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('statistics')">
           <i class="fas fa-chart-bar menu-icon"></i>
           Statistics
         </a>
       </li>
-      <li class="menu-item">
-    <a href="backend/logout.php" class="menu-link">
-        <i class="fas fa-sign-out-alt menu-icon"></i>
-        Logout
-    </a>
-</li>
 
+      <li class="nav-item">
+        <a href="#" class="nav-link" onclick="toggleContent('polling')">
+          <i class="fas fa-map-marker-alt menu-icon"></i>
+          Polling Stations
+        </a>
+      </li>
+
+      <!-- Logout -->
+      <li class="nav-item">
+        <a href="backend/logout.php" class="nav-link">
+          <i class="fas fa-sign-out-alt menu-icon"></i>
+          Logout
+        </a>
+      </li>
     </ul>
   </div>
+</nav>
+
+
 
 <!-- Replace the search box with contestant manifesto cards -->
 

@@ -14,11 +14,10 @@ if ($conn->connect_error) {
 // Check if the request is a POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Assuming you have established a database connection (as shown in your setup script)
-    
+
     // Retrieve data from the POST request
-    $candidateName = $_POST["candidateName"];
-    $position = $_POST["position"];
     $candidateReg = $_POST["candidateReg"];
+    $position = $_POST["position"];
 
     // Perform validation as needed (e.g., check for empty fields)
 
@@ -27,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
     // Use prepared statements to prevent SQL injection
     $stmt = $conn->prepare($sqlInsertNomination);
-    $stmt->bind_param("ss", $candidateName, $position);
+    $stmt->bind_param("ss", $candidateReg, $position);
 
     if ($stmt->execute()) {
         // Nomination data inserted successfully
