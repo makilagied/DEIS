@@ -65,35 +65,60 @@ if ($conn->query($sqlCreateUsersTable) === TRUE) {
 }
 
 // Create the nominations table if it doesn't exist
-$sqlCreateNominationsTable = "CREATE TABLE IF NOT EXISTS nominations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    candidate_name VARCHAR(255) NOT NULL,
-    position VARCHAR(255) NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+$sqlCreateContestantTable = "CREATE TABLE IF NOT EXISTS contestant (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    registration_number VARCHAR(255) NOT NULL,
+    contesting_role VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_registration_number (registration_number)
 )";
+if ($conn->query($sqlCreateContestantTable) === TRUE) {
+    echo "Contestant table created successfully<br>";
+} else {
+    echo "Error creating contestant table: " . $conn->error;
+}
+
+// Create the nominations table if it doesn't exist
+$sqlCreateNominationsTable = "CREATE TABLE IF NOT EXISTS nominations (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    registration_number VARCHAR(255) NOT NULL,
+    contesting_role VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_registration_number (registration_number)
+)";
+
 if ($conn->query($sqlCreateNominationsTable) === TRUE) {
     echo "Nominations table created successfully<br>";
 } else {
     echo "Error creating nominations table: " . $conn->error;
 }
 
-// Create the assessments table if it doesn't exist
-$sqlCreateAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (
+
+// Create the assessor_assessment table
+$sqlCreateAssessmentTable = "CREATE TABLE IF NOT EXISTS assessor_assessment (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    candidate_name VARCHAR(255) NOT NULL,
-    position VARCHAR(255) NOT NULL,
-    score INT NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    registration_number VARCHAR(13) NOT NULL,
+    criteria1 INT NOT NULL,
+    criteria2 INT NOT NULL,
+    criteria3 INT NOT NULL,
+    criteria4 INT NOT NULL,
+    criteria5 INT NOT NULL,
+    criteria6 INT NOT NULL,
+    criteria7 INT NOT NULL,
+    criteria8 INT NOT NULL,
+    criteria9 INT NOT NULL,
+    criteria10 INT NOT NULL,
+    total_score INT GENERATED ALWAYS AS (criteria1 + criteria2 + criteria3 + criteria4 + criteria5 + criteria6 + criteria7 + criteria8 + criteria9 + criteria10) STORED,
+    committee_member_signature VARCHAR(255) NOT NULL,
+    assessment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (registration_number) REFERENCES contestant(registration_number),
+    UNIQUE KEY unique_assessment (registration_number, committee_member_signature)
 )";
-if ($conn->query($sqlCreateAssessmentsTable) === TRUE) {
+if ($conn->query($sqlCreateAssessmentTable) === TRUE) {
     echo "Assessments table created successfully<br>";
 } else {
     echo "Error creating assessments table: " . $conn->error;
 }
-
-// ...
 
 // Create the otp_requests table if it doesn't exist
 $sqlCreateOTPTable = "CREATE TABLE IF NOT EXISTS otp_requests (

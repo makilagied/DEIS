@@ -1,47 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results Submission</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        input[readonly] {
+        background-color: #f8f8f8; /* Change the background color */
+        border: 1px solid #ddd; /* Add a border */
+        cursor: not-allowed; /* Change cursor to "not allowed" */
+    }
 
-    <!-- Modify your navigation menu with Bootstrap classes -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button id="navbar-toggler-icon" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    /* Add some padding to readonly input fields for better visual separation */
+    input[readonly] {
+        padding: 5px;
+    }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        /* Adjust the width and alignment of the input fields */
+        .input-group {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .input-group .form-control {
+            flex: 1;
+            margin-right: 5px;
+        }
+
+        /* Reduce the size of input boxes */
+        .form-control {
+            height: 38px;
+            font-size: 16px;
+        }
+
+        /* Add custom styles to the navigation menu */
+.navbar {
+  background-color: #007BFF; /* Change the background color as needed */
+}
+
+.navbar-brand {
+  color: #fff; /* Change the text color of the brand/logo */
+}
+
+.nav-link {
+  color: #333; /* Change the text color of menu items */
+}
+
+/* Style the menu icon (optional) */
+.menu-icon {
+  margin-right: 8px; /* Add space between icon and text */
+}
+
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Add a brand/logo if needed -->
+  <a class="navbar-brand" href="#">DEIS</a>
+  
+  <!-- Add a button to collapse the menu on smaller screens -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-  <div class="collapse navbar-collapse" id="menuCollapse">
-    <ul class="navbar-nav ml-auto">
-      <!-- Profile -->
+  
+  <!-- Create a menu structure inside a div with a collapse class -->
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <!-- Voting -->
       <li class="nav-item">
-        <a href="#" class="nav-link" onclick="toggleContent('profile')">
-          <i class="fas fa-user menu-icon"></i>
-          Profile
-        </a>
-      </li>
-
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('announcements')">
-          <i class="fas fa-bullhorn menu-icon"></i>
-          Announcements
-        </a>
-      </li>
-
-      <!-- Results -->
-      <li class="nav-item">
-        <a href="#" class="nav-link" onclick="toggleContent('results')">
-          <i class="fas fa-file menu-icon"></i>
-          Results
-        </a>
-      </li>
-
-      <!-- Statistics -->
-      <li class="nav-item">
-        <a href="#" class="nav-link" onclick="toggleContent('statistics')">
-          <i class="fas fa-chart-bar menu-icon"></i>
-          Statistics
-        </a>
-      </li>
-
-      <li class="menu-item">
-        <a href="#" class="menu-link" onclick="toggleContent('polling')">
-          <i class="fas fa-map-marker-alt menu-icon"></i>
-          Polling Stations
+        <a href="dec_dashboard.php" class="nav-link">
+          <i class="fas fa-vote-yea menu-icon"></i>
+          Home
         </a>
       </li>
 
@@ -55,183 +137,97 @@
     </ul>
   </div>
 </nav>
+   <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Election Results Submission Form</h2>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="positionSelect">Select Contested Position:</label>
+                        <select class="form-control" id="positionSelect" name="positionSelect" onchange="updateCandidates()">
+                            <option value="president">President (2 Candidates)</option>
+                            <option value="vice_president">Vice President (3 Candidates)</option>
+                            <option value="secretary">Secretary (1 Candidate)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Candidates and Vote Count Section (Dynamically Populated Based on Selection) -->
+                    <div class="row" id="candidatesSection"></div>
 
+                    <!-- Total Votes and Denied Votes -->
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="totalVotes" name="totalVotes" placeholder="Total Votes" required>
+                            <input type="number" class="form-control" id="deniedVotes" name="deniedVotes" placeholder="Denied Votes" required>
+                        </div>
+                                          <!-- File Upload Input -->
+                      <div class="form-group">
+                        <label for="referenceDocument">Reference/Witness Document:</label>
+                        <input type="file" class="form-control-file" id="referenceDocument" name="referenceDocument">
+                      </div>
+                       </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit Results</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-  <!-- Content sections -->
+    <!-- Include Bootstrap JS and any additional scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Assign Role content goes here -->
-<div class="content-section" id="assignRoleContent">
-  <h2>Assign Role</h2>
-  <!-- Search and role assignment form -->
-  <!-- Search and role assignment form -->
-<form id="assignRoleForm">
-  <label for="searchInput">Search by Username or Regnumber:</label>
-  <input type="text" id="searchInput" name="searchInput" required>
-  <button type="button" onclick="searchUser();">Search User</button>
-</form>
+    <script>
+        // Function to update the candidates and vote count section based on the selected position
+        function updateCandidates() {
+            const positionSelect = document.getElementById("positionSelect");
+            const candidatesSection = document.getElementById("candidatesSection");
+            const selectedPosition = positionSelect.value;
 
-<!-- Display search status -->
-<div id="searchResponse">
-  <p id="searchStatus"></p>
-</div>
+            // Clear the current candidates and vote count section
+            candidatesSection.innerHTML = "";
 
+            // Create input fields for candidate names and vote count
+            if (selectedPosition === "president") {
+                createCandidateInputs(candidatesSection, ["Candidate 1", "Candidate 2"], 2);
+            } else if (selectedPosition === "vice_president") {
+                createCandidateInputs(candidatesSection, ["Candidate 1", "Candidate 2", "Candidate 3"], 3);
+            } else if (selectedPosition === "secretary") {
+                createCandidateInputs(candidatesSection, ["Candidate 1"], 1);
+            }
+        }
 
-<!-- Display user information and role assignment form -->
-<div id="searchResults"></div>
+        // Function to create candidate input fields
+        function createCandidateInputs(container, candidateNames, count) {
+            for (let i = 1; i <= count; i++) {
+                const candidateGroup = document.createElement("div");
+                candidateGroup.classList.add("col-md-4");
+                candidateGroup.innerHTML = `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Candidate ${i}</h5>
+                            <div class="form-group">
+                              <label for="candidateName${i}">Candidate Name:</label>
+                              <input type="text" class="form-control" id="candidateName${i}" name="candidateName${i}" value="${candidateNames[i - 1]}" readonly>
+                             </div>
 
-<!-- Role assignment form (hidden by default) -->
-<form id="roleAssignmentForm" style="display: none;">
-  <label for="role_id">Select Role:</label>
-  <select id="new_role_id" name="new_role_id">
-    <option value="2">Daruso</option>
-  </select>
-  
-  <button type="button" onclick="assignRole()">Assign Role</button>
-  <div id="responseContainer"></div>
-</form>
+                              <div class="form-group">
+                                <label for="voteCount${i}">Votes Acquired:</label>
+                                <input type="number" class="form-control" id="voteCount${i}" name="voteCount${i}" required>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(candidateGroup);
+            }
+        }
 
-</div>
-
-
-  <!-- Edit User content goes here -->
-  <div class="content-section" id="editUserContent">
-    <h2>Edit User Information</h2>
-    <!-- Form to edit user information -->
-    <form id="editUserForm" action="backend/edit_user.php" method="post">
-      <label for="user_id">Select User:</label>
-      <select id="user_id" name="user_id">
-        <option value="1">User 1</option>
-        <option value="2">User 2</option>
-        <!-- Add more user options here -->
-      </select>
-      <label for="new_name">New Name:</label>
-      <input type="text" id="new_name" name="new_name">
-      <label for="new_email">New Email:</label>
-      <input type="email" id="new_email" name="new_email">
-      <button type="submit">Save Changes</button>
-    </form>
-  </div>
-
-</div>
-
-
-
-
-
-<script>
-  function toggleContent(contentId) {
-    // Hide all content sections
-    var contentSections = document.querySelectorAll('.content-section');
-    contentSections.forEach(function(section) {
-      section.style.display = 'none';
-    });
-
-    // Show the selected content section
-    var selectedContent = document.getElementById(contentId + 'Content');
-    selectedContent.style.display = 'block';
-
-    // Hide the role assignment form
-    document.getElementById("roleAssignmentForm").style.display = "none";
-  }
-
-// Function to handle role assignment
-function assignRole() {
-  // Gather selected user IDs and the new role ID
-  var selectedUsers = [];
-  $("input[name='selected_users[]']:checked").each(function() {
-    selectedUsers.push($(this).val());
-  });
-
-  var newRoleDropdown = document.getElementById("new_role_id");
-  var newRoleID = newRoleDropdown ? newRoleDropdown.value : null;
-
-  if (newRoleID !== null) {
-    // Perform AJAX request to assign new role
-    $.ajax({
-      type: "POST",
-      url: "backend/assign_role.php", // Modify this to your backend script
-      data: {
-        selected_users: selectedUsers,
-        new_role_id: newRoleID
-      },
-      success: function(response) {
-        // Display response on the dashboard
-        document.getElementById("responseContainer").innerHTML = response;
-      },
-      error: function(xhr, status, error) {
-        console.error(error);
-      }
-    });
-  } else {
-    console.error("New role dropdown not found");
-  }
-}
-
-
-
-
-
-
-function searchUser() {
-  var searchInput = document.getElementById("searchInput").value;
-  console.log("Search Input:", searchInput);
-
-  $.ajax({
-    type: "POST",
-    url: "backend/search_user.php",
-    data: {
-      searchInput: searchInput
-    },
-    success: function(response) {
-      console.log("Search response:", response);
-
-      var searchStatus = document.getElementById("searchStatus");
-      var searchResults = document.getElementById("searchResults");
-      var roleAssignmentForm = document.getElementById("roleAssignmentForm");
-
-      // Clear previous search results
-      searchResults.innerHTML = "";
-
-      // Parse the JSON response
-      var userResults = JSON.parse(response);
-
-      if (userResults.length > 0) {
-  console.log("Users found");
-
-  var userHtml = "";
-  userResults.forEach(function(user) {
-    userHtml += `
-      <div class="user-entry">
-        <p>User Information: ${user.surname} (${user.regnumber})</p>
-        <label for="user_${user.id}">
-          <input type="checkbox" id="user_${user.id}" name="selected_users[]" value="${user.id}">
-          Select this user
-        </label>
-      </div>
-    `;
-  });
-
-  searchResults.innerHTML = userHtml;
-
-  searchStatus.textContent = ""; // Clear the status message
-  roleAssignmentForm.style.display = "block";
-} else {
-  console.log("No users found");
-  searchStatus.textContent = "No users found";
-  roleAssignmentForm.style.display = "none";
-}
-
-    },
-    error: function(xhr, status, error) {
-      console.error("AJAX Error:", error);
-    }
-  });
-}
-
-
-
-
-
-</script>
-
-
+        // Initially populate the candidates and vote count based on the selected position
+        updateCandidates();
+    </script>
+</body>
+</html>
