@@ -149,7 +149,7 @@ body {
 
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <h4 class="mb-0 text-center">TUME YA RUFAA </h4>
+    <h4 class="mb-0 text-center">APPEALS COMMISSION</h4>
     <div class="user-info">
       <div class="profile-icon">JD</div>
     </div>
@@ -395,11 +395,11 @@ body {
       var resultsBarChart = new Chart(document.getElementById("resultsBarChart"), {
         type: 'bar',
         data: {
-          labels: ['Subject 1', 'Subject 2', 'Subject 3', 'Subject 4'],
+          labels: ['Candidate 1', 'Candidate 2', 'Candidate 3'],
           datasets: [{
             label: 'Results',
-            data: [85, 70, 95, 60], // Sample data
-            backgroundColor: '#0864AF',
+            data: [85, 70, 60], // Sample data
+            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
           }],
         },
         options: {
@@ -423,9 +423,9 @@ body {
       var barChart = new Chart(document.getElementById("barChart"), {
         type: 'bar',
         data: {
-          labels: ['Category 1', 'Category 2', 'Category 3'],
+          labels: ['COICT', 'COHU', 'COSS 3'],
           datasets: [{
-            label: 'Bar Chart Data',
+            label: 'COLLEGE PARTICIPATIONS',
             data: generateRandomData(3),
             backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
           }],
@@ -440,11 +440,11 @@ body {
       var pieChart = new Chart(document.getElementById("pieChart"), {
         type: 'pie',
         data: {
-          labels: ['Label 1', 'Label 2', 'Label 3'],
+          labels: ['Year 1', 'Year 2', 'Year 3','Year 4','Year 5'],
           datasets: [{
-            label: 'Pie Chart Data',
-            data: generateRandomData(3),
-            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
+            label: 'STUDY YEAR PARTICIPATION',
+            data: generateRandomData(5),
+            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45','#08C9AF', '#F6B4C8'],
           }],
         },
         options: {
@@ -457,11 +457,11 @@ body {
       var histogramChart = new Chart(document.getElementById("histogramChart"), {
         type: 'bar',
         data: {
-          labels: ['Range 1', 'Range 2', 'Range 3'],
+          labels: ['Male', 'Female'],
           datasets: [{
-            label: 'Histogram Data',
-            data: generateRandomData(3),
-            backgroundColor: '#0864AF',
+            label: 'GENDER INVOLVEMENT',
+            data: generateRandomData(2),
+            backgroundColor: ['#0864AF', '#F6B418'],
           }],
         },
         options: {

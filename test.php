@@ -3,106 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Election Process Activities</title>
-    <!-- Add Bootstrap CSS CDN -->
+    <title>Electronic Voting Demo</title>
+    <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Add Font Awesome CSS CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Add custom CSS for color themes and fonts -->
     <style>
         body {
-            background-color: #f2f2f2; /* Light gray background */
+            font-family: 'Arial', sans-serif;
+            background-image: url('img/udsm.jpeg'); /* Replace 'your-background-image.jpg' with your image URL */
+            background-size: cover;
+            /* filter: blur(5px); */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0; /* Remove default margin for full coverage */
+        }
+
+        .container {
+            max-width: 800px;
             padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* Adjusted background color with opacity */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .card {
-            background-color: #3498db; /* Blue card background */
+        h1, h2 {
+            color: #0073e6;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
             border: none;
-            border-radius: 8px;
-            color: #ffffff; /* White text color */
+            cursor: pointer;
         }
 
-        .card h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px; /* Larger font size for headings */
-            color: #ffffff; /* White color for headings */
-            background-color: #2980b9; /* Slightly darker blue background for headings */
-            padding: 10px; /* Add some padding to headings */
-            border-radius: 5px; /* Rounded corners for headings */
+        /* Style cards for positions */
+        .position-card {
+            display: inline-block;
+            width: 30%;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
         }
 
-        .card p {
-            font-family: 'Roboto', sans-serif;
-            font-size: 16px; /* Smaller font size for paragraphs */
-            color: #333; /* Dark gray text color for paragraphs */
+        .position-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .position-card .form-check-label {
+            font-size: 16px;
+            display: block;
+        }
+
+        /* Style the Submit button */
+        #submit-button {
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title"><i class="fas fa-user-check"></i> Nomination</h2>
-                        <p class="card-text">Official selection of candidates.</p>
-                        <p class="card-text"><strong>Date:</strong> September 15, 2023</p>
-                        <p class="card-text"><strong>Notes:</strong> Candidates are nominated to run for office.</p>
-                    </div>
+        <h1>Electronic Voting Demo</h1>
+        <div id="otpVerification">
+            <h2>OTP Verification</h2>
+            <input type="text" id="otpInput" class="form-control" placeholder="Enter OTP">
+            <button onclick="verifyOTP()" class="btn btn-primary">Verify OTP</button>
+        </div>
+        <div id="ballotPaper" style="display: none;">
+            <h2>Ballot Paper</h2>
+            <form id="votingForm">
+                <!-- President -->
+                <div class="position-card">
+                    <h3>President</h3>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="president">
+                        Candidate A
+                    </label>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="president">
+                        Candidate B
+                    </label>
                 </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title"><i class="fas fa-file-alt"></i> Assessment</h2>
-                        <p class="card-text">Evaluation of candidate qualifications.</p>
-                        <p class="card-text"><strong>Date:</strong> September 20, 2023</p>
-                        <p class="card-text"><strong>Notes:</strong> Candidates' qualifications are reviewed.</p>
-                    </div>
+                <!-- Vice President -->
+                <div class="position-card">
+                    <h3>Vice President</h3>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="vice_president">
+                        Candidate C
+                    </label>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="vice_president">
+                        Candidate D
+                    </label>
                 </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title"><i class="fas fa-bullhorn"></i> Campaigning</h2>
-                        <p class="card-text">Candidates promote themselves and their platforms.</p>
-                        <p class="card-text"><strong>Date:</strong> October 5, 2023</p>
-                        <p class="card-text"><strong>Notes:</strong> Candidates launch their election campaigns.</p>
-                    </div>
+                <!-- Secretary -->
+                <div class="position-card">
+                    <h3>Secretary</h3>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="secretary">
+                        Candidate E
+                    </label>
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="secretary">
+                        Candidate F
+                    </label>
                 </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title"><i class="fas fa-vote-yea"></i> Voting</h2>
-                        <p class="card-text">Citizens cast their votes to choose their representatives.</p>
-                        <p class="card-text"><strong>Date:</strong> November 2, 2023</p>
-                        <p class="card-text"><strong>Notes:</strong> Election day - citizens participate in voting.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title"><i class="fas fa-poll"></i> Results</h2>
-                        <p class="card-text">Announcement of election outcomes.</p>
-                        <p class="card-text"><strong>Date:</strong> November 5, 2023</p>
-                        <p class="card-text"><strong>Notes:</strong> Official announcement of election results.</p>
-                    </div>
-                </div>
-            </div>
+                <button id="submit-button" type="submit" class="btn btn-primary">Submit Vote</button>
+            </form>
+        </div>
+        <div id="confirmation" style="display: none;">
+            <h2>Vote Confirmation</h2>
+            <p>Your vote has been recorded.</p>
         </div>
     </div>
 
-    <!-- Add Bootstrap JS and jQuery CDNs if needed -->
-    <!--
+    <!-- Include Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Simulated OTP (for demonstration purposes)
+        const simulatedOTP = "123456";
+
+        // Function to verify OTP and show the ballot paper
+        function verifyOTP() {
+            const otpInput = document.getElementById("otpInput").value;
+            if (otpInput === simulatedOTP) {
+                document.getElementById("otpVerification").style.display = "none";
+                displayBallotPaper();
+            } else {
+                alert("Invalid OTP. Please try again.");
+            }
+        }
+
+        // Function to display the ballot paper
+        function displayBallotPaper() {
+            const ballotPaper = document.getElementById("ballotPaper");
+            ballotPaper.style.display = "block";
+        }
+
+        // Function to check if a candidate is selected for each position before submission
+        function checkBallot() {
+            const positions = ["president", "vice_president", "secretary"];
+            for (const position of positions) {
+                const selectedCandidate = document.querySelector(`input[name="${position}"]:checked`);
+                if (!selectedCandidate) {
+                    alert(`Please select a candidate for ${position}.`);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Event listener for form submission
+        document.getElementById("votingForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (checkBallot()) {
+                document.getElementById("votingForm").style.display = "none";
+                document.getElementById("confirmation").style.display = "block";
+            }
+        });
+    </script>
 </body>
 </html>

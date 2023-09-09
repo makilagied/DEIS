@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
   <div class="dashboard-header">
     <h1 class="mb-0 text-center">ELECTION COMMETTE </h1>
     <div class="user-info">
-      <div class="profile-icon">JD</div>
+      <div class="profile-icon">ED</div>
     </div>
   </div>
 

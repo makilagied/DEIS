@@ -385,54 +385,54 @@ button:hover {
   <div class="content-section" id="profileContent">
     <div class="profile-card">
       <div class="profile-icon">JD</div>
-      <h2 class="profile-name">John Doe</h2>
-      <p class="profile-title">Software Engineer</p>
-      <p class="profile-description">Passionate about coding and creating innovative solutions.</p>
+      <h2 class="profile-name">Julius Daniel</h2>
+      <p class="profile-title">Student</p>
+      <p class="profile-description">Passionate about making maps</p>
     </div>
   </div>
 
   <div class="content-section" id="pollingContent">
     <div class="map-container">
       <iframe src="/webmap/index.html" 
-        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
  
 <div class="content-section" id="announcementsContent">
-  <h2>Announcements</h2>
+  <h2>DARUSO Updates</h2>
   <div class="row">
     <div class="col-md-6">
       <div class="announcement-card mb-4">
         <div class="announcement-header">
-          <h3 class="announcement-title">Announcement 1</h3>
+          <h3 class="announcement-title">Nomination Forms Now Available</h3>
           <span class="announcement-date">Posted on August 25, 2023</span>
         </div>
         <div class="announcement-content">
-          This is an important announcement that you can download as a PDF.
+          Every student having pation and vision to lead DARUSO community can be nominated
         </div>
         <div class="announcement-footer">
-          <a href="announcement1.pdf" class="announcement-link" download>Download PDF</a>
+          <a href="announcement1.pdf" class="announcement-link" download>Download</a>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="announcement-card mb-4">
         <div class="announcement-header">
-          <h3 class="announcement-title">Announcement 2</h3>
+          <h3 class="announcement-title">Appeal Forms</h3>
           <span class="announcement-date">Posted on August 24, 2023</span>
         </div>
         <div class="announcement-content">
-          This is another important announcement that you can download as a Word document.
+          This is another important document that you can download when not satsified with the election process.
         </div>
         <div class="announcement-footer">
-          <a href="announcement2.docx" class="announcement-link" download>Download Word</a>
+          <a href="announcement2.docx" class="announcement-link" download>Download</a>
         </div>
       </div>
     </div>
   </div>
   <div class="announcement-card">
-    <h3 class="announcement-title">Read-Only Announcement</h3>
-    <p class="announcement-content">This announcement is for information purposes only.</p>
+    <h3 class="announcement-title">Announcement</h3>
+    <p class="announcement-content">Nomination forms can be returned to any nearest DARUSO office</p>
   </div>
 </div>
   
@@ -504,8 +504,8 @@ button:hover {
         <!-- Contestant 1 -->
         <div class="col-md-4">
           <div class="profile-card">
-            <div class="profile-icon">JD</div>
-            <h2 class="profile-name">John Doe</h2>
+            <div class="profile-icon">KP</div>
+            <h2 class="profile-name">Kennan Paul</h2>
             <p class="profile-position">Candidate for President</p>
             <div class="manifesto-card">
               <h3 class="manifesto-title">Manifesto</h3>
@@ -535,7 +535,7 @@ button:hover {
             <div class="profile-card">
               <div class="profile-icon">EF</div>
               <h2 class="profile-name">Eric Foster</h2>
-              <p class="profile-position">Candidate for Treasurer</p>
+              <p class="profile-position">Candidate for Sectretary</p>
               <div class="manifesto-card">
                 <h3 class="manifesto-title">Manifesto</h3>
                 <p class="manifesto-content">
@@ -598,11 +598,11 @@ button:hover {
       var resultsBarChart = new Chart(document.getElementById("resultsBarChart"), {
         type: 'bar',
         data: {
-          labels: ['Subject 1', 'Subject 2', 'Subject 3', 'Subject 4'],
+          labels: ['Candidate 1', 'Candidate 2', 'Candidate 3'],
           datasets: [{
             label: 'Results',
-            data: [85, 70, 95, 60], // Sample data
-            backgroundColor: '#0864AF',
+            data: [85, 70, 60], // Sample data
+            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
           }],
         },
         options: {
@@ -626,9 +626,9 @@ button:hover {
       var barChart = new Chart(document.getElementById("barChart"), {
         type: 'bar',
         data: {
-          labels: ['Category 1', 'Category 2', 'Category 3'],
+          labels: ['COICT', 'COHU', 'COSS 3'],
           datasets: [{
-            label: 'Bar Chart Data',
+            label: 'COLLEGE PARTICIPATIONS',
             data: generateRandomData(3),
             backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
           }],
@@ -643,11 +643,11 @@ button:hover {
       var pieChart = new Chart(document.getElementById("pieChart"), {
         type: 'pie',
         data: {
-          labels: ['Label 1', 'Label 2', 'Label 3'],
+          labels: ['Year 1', 'Year 2', 'Year 3','Year 4','Year 5'],
           datasets: [{
-            label: 'Pie Chart Data',
-            data: generateRandomData(3),
-            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45'],
+            label: 'STUDY YEAR PARTICIPATION',
+            data: generateRandomData(5),
+            backgroundColor: ['#0864AF', '#F6B418', '#6BBE45','#08C9AF', '#F6B4C8'],
           }],
         },
         options: {
@@ -660,11 +660,11 @@ button:hover {
       var histogramChart = new Chart(document.getElementById("histogramChart"), {
         type: 'bar',
         data: {
-          labels: ['Range 1', 'Range 2', 'Range 3'],
+          labels: ['Male', 'Female'],
           datasets: [{
-            label: 'Histogram Data',
-            data: generateRandomData(3),
-            backgroundColor: '#0864AF',
+            label: 'GENDER INVOLVEMENT',
+            data: generateRandomData(2),
+            backgroundColor: ['#0864AF', '#F6B418'],
           }],
         },
         options: {
