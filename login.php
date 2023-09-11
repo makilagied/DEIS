@@ -27,7 +27,7 @@
 
 body::before {
   content: "";
-  background-image: url('img/udsm.jpeg'); /* Replace with your image URL */
+  background-image: url('img/udsm.jpg'); /* Replace with your image URL */
   filter: blur(1px); /* Adjust the blur radius as needed */
   position: fixed;
   top: 0;
